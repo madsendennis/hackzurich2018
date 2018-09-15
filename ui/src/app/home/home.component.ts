@@ -38,10 +38,9 @@ export class HomeComponent implements OnInit {
   onShowIngredientsOfRecommendedRecipe(recommendationRecipeId: number) {
     this.recipeRecommendations.forEach(r => {
       if (recommendationRecipeId == r.recipeId) {
-        if (r.showIngredients)
-          r.showIngredients = false;
-        else
-          r.showIngredients = true;
+        r.showIngredients = true;
+      } else {
+        r.showIngredients = false;
       }
     });
   }
