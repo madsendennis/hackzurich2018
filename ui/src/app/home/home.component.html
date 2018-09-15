@@ -1,0 +1,16 @@
+<div id="homeComponent">
+  <h4>What am I eating today?</h4>
+  <form>
+    <div class="form-group">
+      <label for="recipeList">Recipe</label>
+      <select class="form-control" id="recipeList">
+        <option value="-1">
+          <span>Select a recipe</span>
+        </option>
+        <option *ngFor="let recipe of recipes" value="{{recipe.id}}">
+          <span>{{recipe.name}}</span>
+        </option>
+      </select>
+    </div>
+  </form>  
+</div>
