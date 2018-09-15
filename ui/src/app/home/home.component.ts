@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
 
   onSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
-    alert(this.selectedRecipe.id);
     this.onHideRecipes();
   }
 
