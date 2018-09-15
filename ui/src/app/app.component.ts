@@ -10,6 +10,7 @@ export class AppComponent {
   showHome : boolean = true;
   showAddRecipe : boolean = false;
   showDashboard : boolean = false;
+  navbarOpen : boolean = false;
 
   onShowHome() {
     this.showHome = true;
@@ -27,5 +28,13 @@ export class AppComponent {
     this.showHome = false;
     this.showAddRecipe = false;
     this.showDashboard = true;
+  }
+
+  onNavbarToggle() {
+    if (this.navbarOpen) {
+      this.navbarOpen = false;
+    } else {
+      this.navbarOpen = true;
+    }
   }
 }
