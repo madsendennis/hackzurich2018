@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
   }
 
   onConsumeFood(recipe: Recipe) {
-    this.http.get(API_IPADDRESS + "/consumefood?name=" + recipe.name + "&resource=" + recipe.resourceConsumption).subscribe((data: ApiJsonResponse) => {
+    this.http.get(API_IPADDRESS + "/user/consumefood?name=" + recipe.name + "&resource=" + recipe.resourceConsumption).subscribe((data: ApiJsonResponse) => {
       if (data.isAdded) {
         this.selectedRecipe = null;
       }
