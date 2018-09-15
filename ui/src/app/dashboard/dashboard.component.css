@@ -9,3 +9,7 @@
 .dashboardCard {
     margin: 5px;
 }
+
+.card-text {
+    font-size: 3rem;
+}

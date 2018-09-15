@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get(API_IPADDRESS + "").subscribe((data: Dashboard) => {
+    this.http.get(API_IPADDRESS + "/user/overview").subscribe((data: Dashboard) => {
       this.overview = data;
     });
   }

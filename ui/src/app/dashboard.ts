@@ -7,4 +7,8 @@ export class Dashboard {
     thresholdWeek: number;
     thresholdMonth: number;
     thresholdYear: number;
+    ratioToday: number;
+    ratioWeek: number;
+    ratioMonth: number;
+    ratioYear: number;
 }
