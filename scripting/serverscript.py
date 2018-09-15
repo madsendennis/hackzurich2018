@@ -40,12 +40,12 @@ def recipes():
         ingrlist = []
         for (counter, x) in enumerate(col[1]):
             if x != 0:
-                ingrlist.append({"name":col[1].index[counter],"qty":x,"resourceConsumption":(fooddf.loc[col[1].index[counter]]["water usage (l/g)"]*x)})
+                ingrlist.append({"name":col[1].index[counter],"qty":x,"resourceConsumption":round(fooddf.loc[col[1].index[counter]]["water usage (l/g)"]*x, 2)})
         recipelist.update({col[0]:ingrlist})
     blub = list(zip(list(range(len(recipesdf))),list(recipesdf.index)))
 
     for line in blub:
-        recipesjsonlist.append({"id":line[0],"name":line[1],"ingredients":recipelist[line[1]],"nutrition":recipesdf.loc[line[1]]["nutrition"],"fat":recipesdf.loc[line[1]]["fat"],"sodium":recipesdf.loc[line[1]]["sodium"],"sugar":recipesdf.loc[line[1]]["sugar"],"protein":recipesdf.loc[line[1]]["protein"],"vegetarian":recipesdf.loc[line[1]]["vegetarian"],"kind":recipesdf.loc[line[1]]["kind"],"carbs":recipesdf.loc[line[1]]["carbs"], "cholesterol":recipesdf.loc[line[1]]["cholesterol"]})
+        recipesjsonlist.append({"id":line[0],"name":line[1],"ingredients":recipelist[line[1]],"nutrition":recipesdf.loc[line[1]]["nutrition"],"fat":recipesdf.loc[line[1]]["fat"],"sodium":recipesdf.loc[line[1]]["sodium"],"sugar":recipesdf.loc[line[1]]["sugar"],"protein":recipesdf.loc[line[1]]["protein"],"vegetarian":recipesdf.loc[line[1]]["vegetarian"],"kind":recipesdf.loc[line[1]]["kind"],"carbs":recipesdf.loc[line[1]]["carbs"], "cholesterol":recipesdf.loc[line[1]]["cholesterol"], "resourceConsumption": round(recipesdf.loc[line[1]]['water usage (l/g)'], 2)})
 
     jsonload = json.dumps(recipesjsonlist)
     json.loads(jsonload)
