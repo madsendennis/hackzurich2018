@@ -10,6 +10,7 @@ class getMaData:
     df = None
     def __init__(self, path):
         self.df   = pd.read_excel(path).fillna(0)
+        self.len  = len(self.df)
         # self.dict = self.df.to_json(orient='records')
 
     def columnStringReplacementWithInt(self, columnName, replacementdict):
@@ -39,6 +40,32 @@ class getMaData:
         self.df[similarity] = dist
         self.df = self.df.sort_values(similarity, ascending=True)
 
+    def getMostSimilar(self, name, threshold=0):
+        self.addSortingColumn(name)
+        #should be less than th + remove if 0.0
+        # return self.df['similarity'] < 50
+        return self.df[1:4]
+
+
+
+
+
+def cleanForShowingRecipe(locdf, numOfFoodItems):
+
+    ingredientsdf = locdf.iloc[:,:numOfFoodItems]
+    recipelist = {}
+    recipesjsonlist = []
+    for col in ingredientsdf.iterrows():
+        ingrlist = []
+        for (counter, x) in enumerate(col[1]):
+            if x != 0:
+                ingrlist.append({"name":col[1].index[counter],"qty":x})
+        recipelist.update({col[0]:ingrlist})
+    blub = list(zip(list(range(len(locdf))),list(locdf.index)))
+
+    tmp = locdf.to_json(orient='records')
+    return tmp
+
 
 def prepareFood():
     obj = getMaData('../data/food.xls')
@@ -54,12 +81,13 @@ def prepareRecipe():
     obj.addSortingColumn('mixed salad')
     return obj
 
-
-
 if __name__ == '__main__':
     foodObj = prepareFood()
     reciObj = prepareRecipe()
 
-    # banan = foodObj.getItem('banana')
+    foods = foodObj.getMostSimilar('beef')
+    recip = reciObj.getMostSimilar('meat pizza')
+
+    cleanForShowingRecipe(recip)
 
     pass
