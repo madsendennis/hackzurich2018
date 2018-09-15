@@ -9,7 +9,7 @@
     <h4 class="display-8">{{selectedRecipe.name}}</h4>
   </div>
   <ul *ngIf="showRecipes" class="list-group">
-    <li *ngFor="let recipe of recipes" class="list-group-item" href="#" (click)=onSelect(recipe)>{{recipe.name}}</li>
+    <li *ngFor="let recipe of recipes" class="list-group-item" href="#" (click)=onSelect(recipe)><h5>{{recipe.name}}</h5></li>
   </ul>
   <div *ngIf="selectedRecipe">
     <ul class="list-group" id="selectedRecipeIngredients">
@@ -26,35 +26,23 @@
         View Recommendations
       </a>
     </p>
-    <div *ngIf="showRecipeRecommendations">
-      <div *ngFor="let recommendation of recipeRecommendations" class="card">
-        <div class="card">
-          <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-              <a href="#" role="button" (click)=onShowIngredientsOfRecommendedRecipe(recommendation.recipeId)>
-                {{recommendation.recipe.name}}
-              </a>
-            </h5>
-          </div>
-      
-          <div *ngIf="recommendation.showIngredients">
-            <div class="card-body">
-              <ul>
-                <li *ngFor="let ingredient of recommendation.recipe.ingredients">
-                  <span>{{ingredient.name}} - {{ingredient.resourceConsumption}}</span>
-                </li>
-              </ul>
-              <p>Total consumption: {{recommendation.recipe.resourceConsumption}}</p>
-            </div>
-            <a href="#" role="button" (click)=onChoosingRecommendedRecipe(recommendation)>
-              I will use this recipe instead
-            </a>
-          </div>
+
+    <ul *ngIf="showRecipeRecommendations" class="list-group" id="recommendedRecipes">
+      <li class="list-group-item" *ngFor="let recommendation of recipeRecommendations" >
+        <h5 (click)=onShowIngredientsOfRecommendedRecipe(recommendation)>{{recommendation.recipe.name}}</h5>
+        <div *ngIf="recommendation.showIngredients">
+          <h6>Ingredients: </h6>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let ingredient of recommendation.recipe.ingredients" >
+              <span>{{ingredient.qty}} g - {{ingredient.name}} - {{ingredient.resourceConsumption}} l</span>
+            </li>
+          </ul>
+          <p class="pageItem">Total water consumption: {{recommendation.recipe.resourceConsumption}} litres</p>
+          <a href="#" role="button" (click)=onChoosingRecommendedRecipe(recommendation)>
+            I will use this recipe instead
+          </a>
         </div>
-      </div>
-      <a class="btn btn-primary" href="#" role="button" (click)=onHideRecommendations()>
-        Hide Recommendations
-      </a>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>
