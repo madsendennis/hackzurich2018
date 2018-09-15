@@ -7,31 +7,16 @@
 
   <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav mr-auto">
-      <li *ngIf="showHome" class="nav-item active">
+      <li class="nav-item" [ngClass]="{'active': showHome}">
         <a class="nav-link" href="#" (click)=onShowHome()>Home <span *ngIf="showHome" class="sr-only">(current)</span></a>
       </li>
-      <li *ngIf="!showHome" class="nav-item">
-        <a class="nav-link" href="#" (click)=onShowHome()>Home <span *ngIf="showHome" class="sr-only">(current)</span></a>
-      </li>
-      <li *ngIf="showAddRecipe" class="nav-item active">
-        <a class="nav-link" href="#" (click)=onShowAddRecipe()>Add Recipe <span *ngIf="showAddRecipe" class="sr-only">(current)</span></a>
-      </li>
-      <li *ngIf="!showAddRecipe" class="nav-item">
-        <a class="nav-link" href="#" (click)=onShowAddRecipe()>Add Recipe <span *ngIf="showAddRecipe" class="sr-only">(current)</span></a>
-      </li>
-      <li *ngIf="showDashboard" class="nav-item active">
+      <li class="nav-item" [ngClass]="{'active': showDashboard}">
         <a class="nav-link" href="#" (click)=onShowDashboard()>Dashboard <span *ngIf="showDashboard" class="sr-only">(current)</span></a>
       </li>
-      <li *ngIf="!showDashboard" class="nav-item">
-          <a class="nav-link" href="#" (click)=onShowDashboard()>Dashboard <span *ngIf="showDashboard" class="sr-only">(current)</span></a>
-        </li>
-      </ul>
+    </ul>
   </div>
 </nav>
 <div *ngIf="showHome">
-    <app-home></app-home>
-</div>
-<div *ngIf="showAddHome">
     <app-home></app-home>
 </div>
 <div *ngIf="showDashboard">

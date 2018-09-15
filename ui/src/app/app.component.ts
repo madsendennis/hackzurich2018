@@ -16,18 +16,14 @@ export class AppComponent {
     this.showHome = true;
     this.showAddRecipe = false;
     this.showDashboard = false;
-  }
-
-  onShowAddRecipe() {
-    this.showHome = false;
-    this.showAddRecipe = true;
-    this.showDashboard = false;
+    this.onNavbarToggle();
   }
 
   onShowDashboard() {
     this.showHome = false;
     this.showAddRecipe = false;
     this.showDashboard = true;
+    this.onNavbarToggle();
   }
 
   onNavbarToggle() {

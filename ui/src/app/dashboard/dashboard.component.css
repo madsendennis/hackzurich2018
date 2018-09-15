@@ -5,3 +5,7 @@
 .dashboardDiv {
     text-align: center;
 }
+
+.dashboardCard {
+    margin: 5px;
+}

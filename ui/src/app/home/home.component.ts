@@ -84,6 +84,5 @@ export class HomeComponent implements OnInit {
         this.selectedRecipe = null;
       }
     });
-    
   }
 }
