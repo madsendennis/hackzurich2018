@@ -85,4 +85,4 @@ def addRecipe(recipe):
 		readnwritenparse()
 	a = 1
 
-readnwritenparse()
+#readnwritenparse()
