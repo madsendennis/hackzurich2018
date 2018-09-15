@@ -15,15 +15,20 @@ class userHandler:
     def addEntry(self, recipe, resource):
         self.sheet = self.sheet.append({'date': datetime.datetime.today(), 'recipe': recipe, 'resource': resource}, ignore_index=True)
         self.writeFile()
+    def __sumStuff__(self, tmpdf):
+        return tmpdf['resource'].sum()
     def getConsumptionDay(self):
-        some = self.sheet[self.sheet['date'],:]
-        return 500
+        some = self.sheet[self.sheet['date'] >= datetime.datetime.today().strftime("%Y-%m-%d")]
+        return self.__sumStuff__(some)
     def getConsumptionWeek(self):
-        return 5000
+        some = self.sheet[self.sheet['date'] >= str(datetime.datetime.today() - datetime.timedelta(days=datetime.datetime.today().weekday()))]
+        return self.__sumStuff__(some)
     def getConsumptionMonth(self):
-        return 50000
+        some = self.sheet[self.sheet['date'] >= datetime.datetime.today().replace(day=1).strftime("%Y-%m-%d")]
+        return self.__sumStuff__(some)
     def getConsumptionYear(self):
-        return 500000
+        some = self.sheet[self.sheet['date'] >= datetime.datetime.today().replace(day=1).replace(month=1).strftime("%Y-%m-%d")]
+        return self.__sumStuff__(some)
 
 
 if __name__ == '__main__':

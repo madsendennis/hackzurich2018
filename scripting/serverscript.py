@@ -74,7 +74,6 @@ def similarRecipes():
     similar = reciObj.getMostSimilar(name)
     return json.dumps(cleanForShowingRecipe(similar, foodObj))
 
-
 @app.route('/similarfoods', methods=["GET"])
 def similarFoods():
     name = request.args.get('name', None)
@@ -82,7 +81,6 @@ def similarFoods():
     foodObj = prepareFood()
     similar = foodObj.getMostSimilar(name)
     return json.dumps(cleanForShowingFoods(similar, qty))
-
 
 @app.route('/user/consumefood', methods=["GET"])
 def userConsumefood():
@@ -94,10 +92,7 @@ def userConsumefood():
 
 @app.route('/user/overview')
 def userOverview():
-    # user = userHandler(userid)
-    return json.dumps({'today': 500, 'week': 5000, 'month': 50000, 'year': 500000,
+    user = userHandler(userid)
+    return json.dumps({'today': user.getConsumptionDay(), 'week': user.getConsumptionWeek(), 'month': user.getConsumptionMonth(), 'year': user.getConsumptionYear(),
                        'thresholdToday': 1000, 'thresholdWeek': 10000, 'thresholdMonth': 100000, 'thresholdYear':1000000})
-
-
-
 
