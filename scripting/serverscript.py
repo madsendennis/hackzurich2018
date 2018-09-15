@@ -52,5 +52,6 @@ def addFood():
 
 @app.route('/addRecipe', methods=["POST"])
 def addRecipe():
-	recipe = request.args.get('recipe')
+	recipe = request.form.to_dict()
 	pdt.addRecipe(recipe)
+	return "hello world"

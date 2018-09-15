@@ -9,6 +9,7 @@ def readnwritenparse():
 	#fooddf
 	recipesdf = pd.read_excel(recipesfile)
 	recipesdf = recipesdf.fillna(0)
+	recipesdf = recipesdf.set_index("name")
 	#recipesdf
 	newcols = []
 	veglist=["non-vegetarian","vegetarian","vegan"]
@@ -73,14 +74,15 @@ def addRecipe(recipe):
 	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
 	recipesdf = pd.read_excel(recipesfile)
 	recipesdf = recipesdf.fillna(0)
+	recipesdf = recipesdf.set_index("name")
 
 	recipe = pd.DataFrame(recipe, index=[0])
 	recipe = recipe.set_index("name")
-	print(recipe)
-	print((recipe).size)
-	recipesdf = recipesdf.append(recipe).fillna(0)
-	recipesdf.sort_index().to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls")
-	readnwritenparse()
+	if(recipe.index[0] not in list(recipesdf.index)):
+		print("added")
+		recipesdf = recipesdf.append(recipe).fillna(0)
+		recipesdf.sort_index().to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls")
+		readnwritenparse()
 	a = 1
 
 readnwritenparse()

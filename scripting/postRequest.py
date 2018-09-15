@@ -3,5 +3,5 @@ r = requests.post("http://127.0.0.1:5000/addFood", data={"name":"celery","water 
 print(r.status_code, r.reason)
 
 
-#r = requests.post("http://127.0.0.1:5000/addRecipe", data={"name":"vegetable soup","celery":50,"carrot":60,"potato":20,"onion":10,"dry pasta":50,"palm oil":5})
-#print(r.status_code, r.reason)
+r = requests.post("http://127.0.0.1:5000/addRecipe", data={"name":"vegetable soup","celery":50,"carrot":60,"potato":20,"onion":10,"dry pasta":50,"palmoil":5})
+print(r.status_code, r.reason)
