@@ -65,14 +65,17 @@ def cleanForShowingRecipe(locdfRec, locdfFood):
                 ingrlist.append({"name": foodname,"qty":x, waterText: ingredienseWater})
         water = locdfRec.loc[recipeName][waterIndex]
         recipesjsonlist.append({'showIngredients': False, 'recipe': {'name': recipeName, 'ingredients': ingrlist, waterText: water}})
-    return json.loads(json.dumps(recipesjsonlist))
+    return recipesjsonlist
 
 
-# def cleanForShowingFoods(locdf):
-#     waterIndex = 'water usage (l/g)'
-#     locdf = locdf.set_index("name")
-#     foodlist = []
-#     return json.dumps(foodlist)
+def cleanForShowingFoods(locdf, qty):
+    waterIndex = 'water usage (l/g)'
+    waterText = 'Resource Consumption'
+    locdf = locdf.set_index('name')
+    foodlist = []
+    for row in locdf.iterrows():
+        foodlist.append({'name': row[0], 'qty': qty, waterText: float(row[1][waterIndex])*float(qty)})
+    return foodlist
 
 
 def prepareFood():
@@ -98,6 +101,6 @@ if __name__ == '__main__':
 
     hest = cleanForShowingRecipe(recip, foodObj)
 
-    # hest = cleanForShowingFoods(foods)
+    hest = cleanForShowingFoods(foods, 20)
 
     pass

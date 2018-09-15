@@ -4,7 +4,7 @@ import pandas as pd
 import pandadata as pdt
 from flask import request
 from pandas.io.json import json_normalize
-from newStuff import prepareRecipe, prepareFood, getMaData, cleanForShowingRecipe
+from newStuff import prepareRecipe, prepareFood, getMaData, cleanForShowingRecipe, cleanForShowingFoods
 
 app = Flask(__name__)
 
@@ -66,9 +66,18 @@ def addRecipe():
 
 @app.route('/similarrecipes', methods=["GET"])
 def similarRecipes():
-    name = request.args.get('name')
+    name = request.args.get('name', None)
     foodObj = prepareFood()
     reciObj = prepareRecipe()
     similar = reciObj.getMostSimilar(name)
     return json.dumps(cleanForShowingRecipe(similar, foodObj))
+
+
+@app.route('/similarfoods', methods=["GET"])
+def similarFoods():
+    name = request.args.get('name', None)
+    qty = request.args.get('qty', None)
+    foodObj = prepareFood()
+    similar = foodObj.getMostSimilar(name)
+    return json.dumps(cleanForShowingFoods(similar, qty))
 
