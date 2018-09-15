@@ -7,7 +7,8 @@ export const RECIPE_RECOMMENDATIONS : RecipeRecommendation[] = [
             {name: 'Ingredient 1', qty: 2, resourceConsumption: 3},
             {name: 'Ingredient 4', qty: 0.5, resourceConsumption: 4},
             {name: 'Ingredient 5', qty: 0.75, resourceConsumption: 0.5},
-        ] },
+        ],
+        resourceConsumption: 7.5 },
         showIngredients: false
     },
     {
@@ -15,7 +16,8 @@ export const RECIPE_RECOMMENDATIONS : RecipeRecommendation[] = [
         recipe: {id: 2, name: 'Recipe 2', ingredients : [
             {name: 'Ingredient 4', qty: 0.5, resourceConsumption: 4},
             {name: 'Ingredient 5', qty: 0.75, resourceConsumption: 0.5},
-        ] },
+        ],
+        resourceConsumption: 4.5 },
         showIngredients: false
     },
 ] 

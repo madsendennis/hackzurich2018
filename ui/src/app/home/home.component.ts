@@ -12,19 +12,19 @@ import { RECIPE_RECOMMENDATIONS } from '../mock-recipe-recommendations'
 export class HomeComponent implements OnInit {
   recipes : Recipe[] = RECIPES;
   selectedRecipe : Recipe;
-  recipeResourceConsumption: number;
   recipeRecommendations : RecipeRecommendation[] = RECIPE_RECOMMENDATIONS;
   showRecipeRecommendations : boolean = false;
+  showRecipes : boolean = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSelect(recipeId: number): void {
-    this.selectedRecipe = this.recipes.find(s => s.id == recipeId);
-    this.recipeResourceConsumption = 0;
-    this.selectedRecipe.ingredients.forEach(i => this.recipeResourceConsumption += i.resourceConsumption);
+  onSelect(recipe: Recipe): void {
+    this.selectedRecipe = recipe;
+    alert(this.selectedRecipe.id);
+    this.onHideRecipes();
   }
 
   onViewRecommendations() {
@@ -43,5 +43,19 @@ export class HomeComponent implements OnInit {
         r.showIngredients = false;
       }
     });
+  }
+
+  onChoosingRecommendedRecipe(recommendedRecipe: RecipeRecommendation) {
+    recommendedRecipe.showIngredients = false;
+    this.onHideRecommendations();
+    this.onSelect(recommendedRecipe.recipe);
+  }
+
+  onShowRecipes() {
+    this.showRecipes = true;
+  }
+
+  onHideRecipes() {
+    this.showRecipes = false;
   }
 }

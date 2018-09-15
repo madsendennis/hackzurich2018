@@ -1,25 +1,21 @@
 <div id="homeComponent">
   <h4>What am I eating today?</h4>
-  <form>
-    <div class="form-group">
-      <label for="recipeList">Recipe</label>
-      <select class="form-control" id="recipeList" (change)="onSelect($event.target.value)">
-        <option value="-1">
-          <span>Select a recipe</span>
-        </option>
-        <option *ngFor="let recipe of recipes" value="{{recipe.id}}">
-          <span>{{recipe.name}}</span>
-        </option>
-      </select>
-    </div>
-  </form>
+  <div>
+    <a class="btn btn-success dropdown-toggle" href="#" role="button" (click)=onShowRecipes()>
+    Choose a recipe
+    </a>
+    <input *ngIf="selectedRecipe" disabled value="{{selectedRecipe.name}}">
+  </div>
+  <div *ngIf="showRecipes">
+    <a *ngFor="let recipe of recipes" class="dropdown-item" href="#" (click)=onSelect(recipe)>{{recipe.name}}</a>
+  </div>
   <div *ngIf="selectedRecipe">
     <ul id="selectedRecipeIngredients">
       <li *ngFor="let ingredient of selectedRecipe.ingredients">
         <span>{{ingredient.name}} - {{ingredient.resourceConsumption}}</span>
       </li>
     </ul>
-    <p>Total consumption: {{recipeResourceConsumption}}</p>
+    <p>Total consumption: {{selectedRecipe.resourceConsumption}}</p>
     <p>We would like for similar recipes with lower cost to the environment.</p>
     <p>
       <a class="btn btn-primary" href="#" role="button" (click)=onViewRecommendations()>
@@ -44,8 +40,11 @@
                   <span>{{ingredient.name}} - {{ingredient.resourceConsumption}}</span>
                 </li>
               </ul>
-              <p>Total consumption: {{recipeResourceConsumption}}</p>
+              <p>Total consumption: {{recommendation.recipe.resourceConsumption}}</p>
             </div>
+            <a href="#" role="button" (click)=onChoosingRecommendedRecipe(recommendation)>
+              I will use this recipe instead
+            </a>
           </div>
         </div>
       </div>
