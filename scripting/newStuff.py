@@ -51,7 +51,8 @@ def cleanForShowingRecipe(locdfRec, locdfFood):
     numOfFoodItems = locdfFood.len
     waterIndex = 'water usage (l/g)'
     waterText = 'Resource Consumption'
-    locdfRec = locdfRec.set_index("name")
+    locdfRec = locdfRec.set_index('name')
+    locdfFood = locdfFood.df.set_index('name')
     ingredientsdf = locdfRec.iloc[:, 1:numOfFoodItems]
     recipesjsonlist = []
     for (bigIndex, rows) in enumerate(ingredientsdf.iterrows()):
@@ -59,7 +60,9 @@ def cleanForShowingRecipe(locdfRec, locdfFood):
         ingrlist = []
         for (counter, x) in enumerate(rows[1]):
             if x != 0:
-                ingrlist.append({"name":rows[1].index[counter],"qty":x, waterText: 0.0})
+                foodname = rows[1].index[counter]
+                ingredienseWater = locdfFood.loc[foodname, waterIndex]
+                ingrlist.append({"name": foodname,"qty":x, waterText: ingredienseWater})
         water = locdfRec.loc[recipeName][waterIndex]
         recipesjsonlist.append({'showIngredients': False, 'recipe': {'name': recipeName, 'ingredients': ingrlist, waterText: water}})
     return json.loads(json.dumps(recipesjsonlist))
