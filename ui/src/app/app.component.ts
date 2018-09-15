@@ -6,5 +6,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Sustainable Recipes';
+  title : string = 'Sustainable Recipes';
+  showHome : boolean = true;
+  showAddRecipe : boolean = false;
+  showDashboard : boolean = false;
+
+  onShowHome() {
+    this.showHome = true;
+    this.showAddRecipe = false;
+    this.showDashboard = false;
+  }
+
+  onShowAddRecipe() {
+    this.showHome = false;
+    this.showAddRecipe = true;
+    this.showDashboard = false;
+  }
+
+  onShowDashboard() {
+    this.showHome = false;
+    this.showAddRecipe = false;
+    this.showDashboard = true;
+  }
 }
