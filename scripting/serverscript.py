@@ -45,7 +45,7 @@ def recipes():
     blub = list(zip(list(range(len(recipesdf))),list(recipesdf.index)))
 
     for line in blub:
-        recipesjsonlist.append({"id":line[0],"name":line[1],"ingredients":recipelist[line[1]],"nutrition":recipesdf.loc[line[1]]["nutrition"],"fat":recipesdf.loc[line[1]]["fat"],"sodium":recipesdf.loc[line[1]]["sodium"],"sugar":recipesdf.loc[line[1]]["sugar"],"protein":recipesdf.loc[line[1]]["protein"],"vegetarian":recipesdf.loc[line[1]]["vegetarian"],"kind":recipesdf.loc[line[1]]["kind"]}) # ,"carbs":recipesdf.loc[line[1]]["carbs"], "cholesterol":recipesdf.loc[line[1]]["cholesterol"]
+        recipesjsonlist.append({"id":line[0],"name":line[1],"ingredients":recipelist[line[1]],"nutrition":recipesdf.loc[line[1]]["nutrition"],"fat":recipesdf.loc[line[1]]["fat"],"sodium":recipesdf.loc[line[1]]["sodium"],"sugar":recipesdf.loc[line[1]]["sugar"],"protein":recipesdf.loc[line[1]]["protein"],"vegetarian":recipesdf.loc[line[1]]["vegetarian"],"kind":recipesdf.loc[line[1]]["kind"],"carbs":recipesdf.loc[line[1]]["carbs"], "cholesterol":recipesdf.loc[line[1]]["cholesterol"]})
 
     jsonload = json.dumps(recipesjsonlist)
     json.loads(jsonload)

@@ -13,14 +13,14 @@ def readnwritenparse():
 	#recipesdf
 	newcols = []
 	veglist=["non-vegetarian","vegetarian","vegan"]
-	for cols in fooddf.columns[2:]:
+	for cols in fooddf.columns[:]:
 	    #print(cols)
 	    col = []
 	    for recipe in recipesdf.iterrows():
 	        nutrition = 0
 	        ifstring = []
 	        isstring = False
-	        for ingredient in range(len(recipe[1])):
+	        for ingredient in range(1,len(recipe[1])):
 	            if(recipe[1][ingredient] != 0.0):
 	                if(type(fooddf.loc[recipesdf.columns[ingredient]][cols]) is str):
 	                    isstring = True
@@ -43,8 +43,8 @@ def readnwritenparse():
 	    #print(col)
 	    newcols.append(col)
 	    
-	for cols in range(len(fooddf.columns[2:])):
-	    recipesdf[fooddf.columns[2:][cols]] = newcols[cols]
+	for cols in range(len(fooddf.columns[:])):
+	    recipesdf[fooddf.columns[:][cols]] = newcols[cols]
 	recipesdf.index.name="name"
 	recipesdf.to_excel("../data/recipes_done.xls")
 
