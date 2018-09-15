@@ -69,6 +69,6 @@ def similarRecipes():
     name = request.args.get('name')
     foodObj = prepareFood()
     reciObj = prepareRecipe()
-    similar = reciObj.getMostSimilar(name, foodObj.len)
-    return json.dumps(cleanForShowingRecipe(similar, foodObj.len))
+    similar = reciObj.getMostSimilar(name)
+    return json.dumps(cleanForShowingRecipe(similar, foodObj))
 

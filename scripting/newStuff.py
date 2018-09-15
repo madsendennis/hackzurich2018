@@ -47,19 +47,21 @@ class getMaData:
         return self.df[1:4]
 
 
-def cleanForShowingRecipe(locdf, numOfFoodItems):
+def cleanForShowingRecipe(locdfRec, locdfFood):
+    numOfFoodItems = locdfFood.len
     waterIndex = 'water usage (l/g)'
-    locdf = locdf.set_index("name")
-    ingredientsdf = locdf.iloc[:,1:numOfFoodItems]
+    waterText = 'Resource Consumption'
+    locdfRec = locdfRec.set_index("name")
+    ingredientsdf = locdfRec.iloc[:, 1:numOfFoodItems]
     recipesjsonlist = []
     for (bigIndex, rows) in enumerate(ingredientsdf.iterrows()):
         recipeName = rows[0]
         ingrlist = []
         for (counter, x) in enumerate(rows[1]):
             if x != 0:
-                ingrlist.append({"name":rows[1].index[counter],"qty":x})
-        water = locdf.loc[recipeName][waterIndex]
-        recipesjsonlist.append({'showIngredients': False, 'recipe': {'name': recipeName, 'ingredients': ingrlist, waterIndex: water}})
+                ingrlist.append({"name":rows[1].index[counter],"qty":x, waterText: 0.0})
+        water = locdfRec.loc[recipeName][waterIndex]
+        recipesjsonlist.append({'showIngredients': False, 'recipe': {'name': recipeName, 'ingredients': ingrlist, waterText: water}})
     return json.loads(json.dumps(recipesjsonlist))
 
 
@@ -91,7 +93,7 @@ if __name__ == '__main__':
     foods = foodObj.getMostSimilar('beef')
     recip = reciObj.getMostSimilar('meat pizza')
 
-    __ = cleanForShowingRecipe(recip, foodObj.len)
+    hest = cleanForShowingRecipe(recip, foodObj)
 
     # hest = cleanForShowingFoods(foods)
 
