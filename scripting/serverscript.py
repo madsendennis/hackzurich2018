@@ -64,11 +64,9 @@ def addRecipe():
     pdt.addRecipe(recipe)
     return "{'isAdded':True}"
 
-@app.route('/similarrecipe', methods=["GET"])
-def similaRecipe():
+@app.route('/similarrecipes', methods=["GET"])
+def similarRecipes():
     name = request.args.get('name')
-    print(name)
-
     foodObj = prepareFood()
     reciObj = prepareRecipe()
     similar = reciObj.getMostSimilar(name, foodObj.len)
