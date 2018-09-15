@@ -40,18 +40,18 @@ def recipes():
 	    recipesjsonlist.append({"id":line[0],"name":line[1],"ingredients":recipelist[line[1]],"nutrition":recipesdf.loc[line[1]]["nutrition"],"fat":recipesdf.loc[line[1]]["fat"],"sodium":recipesdf.loc[line[1]]["sodium"],"sugar":recipesdf.loc[line[1]]["sugar"],"carbs":recipesdf.loc[line[1]]["carbs"],"protein":recipesdf.loc[line[1]]["protein"],"cholesterol":recipesdf.loc[line[1]]["cholesterol"],"vegetarian":recipesdf.loc[line[1]]["vegetarian"],"kind":recipesdf.loc[line[1]]["kind"]})
 
 	recipesjsonlist
-	jsonforrufus = json.dumps(recipesjsonlist)
-	json.loads(jsonforrufus)
-	return jsonforrufus
+	jsonload = json.dumps(recipesjsonlist)
+	json.loads(jsonload)
+	return jsonload
 
 @app.route('/addFood', methods=["POST"])
 def addFood():
 	food = request.form.to_dict()
 	pdt.addFood(food)
-	return "hello world"
+	return "{'isAdded':True}"
 
 @app.route('/addRecipe', methods=["POST"])
 def addRecipe():
 	recipe = request.form.to_dict()
 	pdt.addRecipe(recipe)
-	return "hello world"
+	return "{'isAdded':True}"
