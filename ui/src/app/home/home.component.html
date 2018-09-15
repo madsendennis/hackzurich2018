@@ -1,8 +1,8 @@
 <div id="homeComponent">
   <h4>What am I eating today?</h4>
   <div class="pageItem">
-    <a class="btn btn-success dropdown-toggle" href="#" role="button" (click)=onShowRecipes()>
-    Choose a recipe
+    <a class="btn btn-info dropdown-toggle" href="#" role="button" (click)=onShowRecipes()>
+    Choose your recipe
     </a>
   </div>
   <div *ngIf="selectedRecipe" class="container">
@@ -36,7 +36,7 @@
     </div>
     <p>We would like to recommend similar recipes with lower cost to the environment.</p>
     <p>
-      <a id="viewRecipeRecommendations" class="btn btn-primary" href="#viewRecipeRecommendations" role="button" (click)=onViewRecommendations()>
+      <a id="viewRecipeRecommendations" class="btn btn-info" href="#viewRecipeRecommendations" role="button" (click)=onViewRecommendations()>
         View Recommendations
       </a>
     </p>
@@ -58,5 +58,12 @@
         </div>
       </li>
     </ul>
+
+    <p>
+      <a id="consumeFood" class="btn btn-info" href="#consumeFood" role="button" (click)=onConsumeFood(selectedRecipe)>
+        Consume Food
+      </a>
+    </p>
+  
   </div>
 </div>

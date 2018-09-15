@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_IPADDRESS } from '../custom.constants';
 import { RecipeIngredient } from '../recipeingredient';
+import { ApiJsonResponse } from '../api.json.response';
 
 @Component({
   selector: 'app-home',
@@ -75,6 +76,14 @@ export class HomeComponent implements OnInit {
       this.alternateIngredients = data;
       this.alternateIngredientsDisplayedFor = recipeIngredient.name;
     });
+  }
 
+  onConsumeFood(recipe: Recipe) {
+    this.http.get(API_IPADDRESS + "/consumefood?name=" + recipe.name + "&resource=" + recipe.resourceConsumption).subscribe((data: ApiJsonResponse) => {
+      if (data.isAdded) {
+        this.selectedRecipe = null;
+      }
+    });
+    
   }
 }
