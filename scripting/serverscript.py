@@ -92,4 +92,12 @@ def userConsumefood():
     user.addEntry(name, resource)
     return json.dumps({'isAdded':True})
 
+@app.route('/user/overview')
+def userOverview():
+    # user = userHandler(userid)
+    return json.dumps({'today': 500, 'week': 5000, 'month': 50000, 'year': 500000,
+                       'thresholdToday': 1000, 'thresholdWeek': 10000, 'thresholdMonth': 100000, 'thresholdYear':1000000})
+
+
+
 
