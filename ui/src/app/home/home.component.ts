@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe';
-import { RECIPES} from '../mock-recipes'
 import { RecipeRecommendation } from '../reciperecommendations';
 import { RECIPE_RECOMMENDATIONS } from '../mock-recipe-recommendations'
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { API_IPADDRESS } from '../custom.constants';
 
 @Component({
   selector: 'app-home',
@@ -22,13 +22,16 @@ export class HomeComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get("http://0.0.0.0:5000/recipes").subscribe((data: Recipe[]) => {
+    this.http.get(API_IPADDRESS + "/recipes").subscribe((data: Recipe[]) => {
       this.recipes = data;
     });
   }
 
   onSelect(recipe: Recipe): void {
     this.selectedRecipe = recipe;
+    this.http.get(API_IPADDRESS + "/similarrecipes?name="+recipe.name).subscribe((data: RecipeRecommendation[]) => {
+      this.recipeRecommendations = data;
+    });
     this.onHideRecipes();
   }
 
