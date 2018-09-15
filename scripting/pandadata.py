@@ -44,7 +44,7 @@ def readnwritenparse():
 	    
 	for cols in range(len(fooddf.columns[2:])):
 	    recipesdf[fooddf.columns[2:][cols]] = newcols[cols]
-	recipesdf.index.name="Name"
+	recipesdf.index.name="name"
 	recipesdf.to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes_done.xls")
 
 def addFoodItem(food):

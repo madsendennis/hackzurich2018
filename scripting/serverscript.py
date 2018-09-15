@@ -1,6 +1,9 @@
 from flask import Flask
 import json
 import pandas as pd
+import pandadata as pdt
+from flask import request
+
 
 app = Flask(__name__)
 
@@ -8,7 +11,7 @@ def hello_world():
     return 'Hello, World!'
 
 
-@app.route('/')
+@app.route('/rufus')
 def forRufus():
 	foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
 	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes_done.xls"
@@ -17,6 +20,7 @@ def forRufus():
 	fooddf = fooddf.set_index("name")
 
 	recipesdf = pd.read_excel(recipesfile)
+	recipesdf = recipesdf.set_index("name")
 	ingredientsdf = recipesdf.iloc[:,:len(fooddf)]
 	recipelist = {}
 	recipesjsonlist = []
@@ -38,3 +42,13 @@ def forRufus():
 	jsonforrufus = json.dumps(recipesjsonlist)
 	json.loads(jsonforrufus)
 	return jsonforrufus
+
+@app.route('/addFood')
+def addFood():
+	food = request.args.get('food')
+	pdt.addFood(food)
+
+@app.route('/addRecipe')
+def addRecipe():
+	recipe = request.args.get('recipe')
+	pdt.addRecipe(recipe)
