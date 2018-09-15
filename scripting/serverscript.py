@@ -5,6 +5,9 @@ import pandadata as pdt
 from flask import request
 from pandas.io.json import json_normalize
 from newStuff import prepareRecipe, prepareFood, getMaData, cleanForShowingRecipe, cleanForShowingFoods
+from user import userHandler
+
+userid = '0001'
 
 app = Flask(__name__)
 
@@ -50,19 +53,18 @@ def recipes():
     jsonload = json.dumps(recipesjsonlist)
     json.loads(jsonload)
     return jsonload
-    # return json.dumps({})
 
 @app.route('/addFood', methods=["POST"])
 def addFood():
     food = request.form.to_dict()
     pdt.addFood(food)
-    return "{'isAdded':True}"
+    return json.dumps({'isAdded': True})
 
 @app.route('/addRecipe', methods=["POST"])
 def addRecipe():
     recipe = request.form.to_dict()
     pdt.addRecipe(recipe)
-    return "{'isAdded':True}"
+    return json.dumps({'isAdded': True})
 
 @app.route('/similarrecipes', methods=["GET"])
 def similarRecipes():
@@ -80,4 +82,14 @@ def similarFoods():
     foodObj = prepareFood()
     similar = foodObj.getMostSimilar(name)
     return json.dumps(cleanForShowingFoods(similar, qty))
+
+
+@app.route('/user/consumefood', methods=["GET"])
+def userConsumefood():
+    user = userHandler(userid)
+    name = request.args.get('name', None)
+    resource = request.args.get('resource', None)
+    user.addEntry(name, resource)
+    return json.dumps({'isAdded':True})
+
 
