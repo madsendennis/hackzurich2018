@@ -40,7 +40,7 @@ def recipes():
         ingrlist = []
         for (counter, x) in enumerate(col[1]):
             if x != 0:
-                ingrlist.append({"name":col[1].index[counter],"qty":x,"waterconsumption":(fooddf.loc[col[1].index[counter]]["water usage (l/g)"]*x)})
+                ingrlist.append({"name":col[1].index[counter],"qty":x,"resourceConsumption":(fooddf.loc[col[1].index[counter]]["water usage (l/g)"]*x)})
         recipelist.update({col[0]:ingrlist})
     blub = list(zip(list(range(len(recipesdf))),list(recipesdf.index)))
 

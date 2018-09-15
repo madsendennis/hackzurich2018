@@ -50,7 +50,7 @@ class getMaData:
 def cleanForShowingRecipe(locdfRec, locdfFood):
     numOfFoodItems = locdfFood.len
     waterIndex = 'water usage (l/g)'
-    waterText = 'Resource Consumption'
+    waterText = 'resourceConsumption'
     locdfRec = locdfRec.set_index('name')
     locdfFood = locdfFood.df.set_index('name')
     ingredientsdf = locdfRec.iloc[:, 1:numOfFoodItems]
@@ -70,7 +70,7 @@ def cleanForShowingRecipe(locdfRec, locdfFood):
 
 def cleanForShowingFoods(locdf, qty):
     waterIndex = 'water usage (l/g)'
-    waterText = 'Resource Consumption'
+    waterText = 'resourceConsumption'
     locdf = locdf.set_index('name')
     foodlist = []
     for row in locdf.iterrows():
