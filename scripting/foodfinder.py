@@ -1,6 +1,5 @@
 import pandas as pd
 from sklearn.metrics.pairwise import euclidean_distances
-from functools import cmp_to_key
 import numpy as np
 
 def readFoodStuff():
@@ -11,7 +10,6 @@ def readFoodStuff():
 
 def orderFoods(selected, lib):
     sel = selected[1:-1]
-    num,_ = lib.shape
     dist = []
     for item in lib:
         tocmp = item[1:-1]

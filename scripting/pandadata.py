@@ -1,6 +1,6 @@
 import pandas as pd
-foodfile = "../data/food.xls"
-recipesfile = "../data/recipes.xls"
+foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
+recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
 fooddf = pd.read_excel(foodfile)
 fooddf = fooddf.dropna(how='all')
 fooddf = fooddf.set_index("Name")
@@ -21,7 +21,7 @@ for cols in fooddf.columns[2:]:
             if(recipe[1][ingredient] != 0.0):
                 if(type(fooddf.loc[recipesdf.columns[ingredient]][cols]) is str):
                     isstring = True
-                    ifstring.append(fooddf.loc[recipesdf.columns[ingredient]][cols])
+                    ifstring.extend((fooddf.loc[recipesdf.columns[ingredient]][cols]).replace(" ","").split(","))
                 else:
                     isstring = False
                     nutrition += recipe[1][ingredient]*fooddf.loc[recipesdf.columns[ingredient]][cols]     
@@ -42,4 +42,4 @@ for cols in fooddf.columns[2:]:
     
 for cols in range(len(fooddf.columns[2:])):
     recipesdf[fooddf.columns[2:][cols]] = newcols[cols]
-recipesdf.to_excel("../data/recipes_done.xls")
+recipesdf.to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes_done.xls")
