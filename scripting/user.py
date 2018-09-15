@@ -16,15 +16,21 @@ class userHandler:
         self.sheet = self.sheet.append({'date': datetime.datetime.today(), 'recipe': recipe, 'resource': resource}, ignore_index=True)
         self.writeFile()
     def getConsumptionDay(self):
-        pass
+        some = self.sheet[self.sheet['date'],:]
+        return 500
     def getConsumptionWeek(self):
-        pass
+        return 5000
     def getConsumptionMonth(self):
-        pass
-
+        return 50000
+    def getConsumptionYear(self):
+        return 500000
 
 
 if __name__ == '__main__':
     userid = '0001'
     user = userHandler(userid)
-    user.addEntry("funnyStuffdsa", 25)
+    # user.addEntry("funnyStuffdsa", 25)
+    print(user.getConsumptionDay())
+    print(user.getConsumptionWeek())
+    print(user.getConsumptionMonth())
+    print(user.getConsumptionYear())
