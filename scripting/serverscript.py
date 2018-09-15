@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import pandadata as pdt
 from flask import request
+from pandas.io.json import json_normalize
 
 
 app = Flask(__name__)
@@ -43,12 +44,13 @@ def forRufus():
 	json.loads(jsonforrufus)
 	return jsonforrufus
 
-@app.route('/addFood')
+@app.route('/addFood', methods=["POST"])
 def addFood():
-	food = request.args.get('food')
+	food = request.form.to_dict()
 	pdt.addFood(food)
+	return "hello world"
 
-@app.route('/addRecipe')
+@app.route('/addRecipe', methods=["POST"])
 def addRecipe():
 	recipe = request.args.get('recipe')
 	pdt.addRecipe(recipe)

@@ -47,7 +47,7 @@ def readnwritenparse():
 	recipesdf.index.name="name"
 	recipesdf.to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes_done.xls")
 
-def addFoodItem(food):
+def addFood(food):
 	foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
 	fooddf = pd.read_excel(foodfile)
 	fooddf = fooddf.dropna(how='all')
@@ -55,8 +55,14 @@ def addFoodItem(food):
 	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
 	recipesdf = pd.read_excel(recipesfile)
 	recipesdf = recipesdf.fillna(0)
-	fooddf = fooddf.append(food, ignore_index=True)
-	readnwritenparse()
+	food = pd.DataFrame(food, index=[0])
+	food = food.set_index("name")
+	if(list(food.index)[0] not in list(fooddf.index)):
+		print("added")
+		fooddf = fooddf.append(food).fillna(0)
+		fooddf = fooddf.drop_duplicates()
+		fooddf.drop_duplicates().sort_index().to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls")
+		readnwritenparse()
 	a = 1
 
 def addRecipe(recipe):
@@ -67,7 +73,13 @@ def addRecipe(recipe):
 	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
 	recipesdf = pd.read_excel(recipesfile)
 	recipesdf = recipesdf.fillna(0)
-	recipesdf = recipesdf.append(recipe, ignore_index=True)
+
+	recipe = pd.DataFrame(recipe, index=[0])
+	recipe = recipe.set_index("name")
+	print(recipe)
+	print((recipe).size)
+	recipesdf = recipesdf.append(recipe).fillna(0)
+	recipesdf.sort_index().to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls")
 	readnwritenparse()
 	a = 1
 
