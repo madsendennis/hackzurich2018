@@ -93,8 +93,18 @@ def userConsumefood():
 @app.route('/user/overview')
 def userOverview():
     user = userHandler(userid)
-    return json.dumps({'today': round(user.getConsumptionDay()/1000.0,2), 'week': round(user.getConsumptionWeek()/1000.0,2), 'month': round(user.getConsumptionMonth()/1000.0,2), 'year': round(user.getConsumptionYear()/1000.0,2),
-                       'thresholdToday': 3.5, 'thresholdWeek': 24.5, 'thresholdMonth': 105.0, 'thresholdYear':1277.5})
+    valToday   = round(user.getConsumptionDay()  /1000.0,2)
+    valWeek    = round(user.getConsumptionWeek() / 1000.0, 2)
+    valMonth   = round(user.getConsumptionMonth()/1000.0,2)
+    valYear    = round(user.getConsumptionYear() /1000.0,2)
+    ratioToday = round(100*valToday/3.5, 0)
+    ratioWeek  = round(100*valWeek/24.5, 0)
+    ratioMonth = round(100*valMonth/105.0, 0)
+    ratioYear  = round(100*valYear/1277.5, 0)
+    return json.dumps({'today': valToday, 'week': valWeek, 'month': valMonth, 'year': valYear,
+                       'thresholdToday': 3.5, 'thresholdWeek': 24.5, 'thresholdMonth': 105.0, 'thresholdYear':1277.5,
+                       'ratioToday': ratioToday, 'ratioWeek': ratioWeek, 'ratioMonth': ratioMonth, 'ratioYear': ratioYear
+                       })
 
 # 5000 L/day = 5kL
 # week - 35L
