@@ -5,13 +5,13 @@ def readnwritenparse():
 	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
 	fooddf = pd.read_excel(foodfile)
 	fooddf = fooddf.dropna(how='all')
-	fooddf = fooddf.set_index("Name")
+	fooddf = fooddf.set_index("name")
 	#fooddf
 	recipesdf = pd.read_excel(recipesfile)
 	recipesdf = recipesdf.fillna(0)
 	#recipesdf
 	newcols = []
-	veglist=["Non-vegetarian","Vegetarian","Vegan"]
+	veglist=["non-vegetarian","vegetarian","vegan"]
 	for cols in fooddf.columns[2:]:
 	    #print(cols)
 	    col = []
@@ -46,5 +46,29 @@ def readnwritenparse():
 	    recipesdf[fooddf.columns[2:][cols]] = newcols[cols]
 	recipesdf.index.name="Name"
 	recipesdf.to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes_done.xls")
+
+def addFoodItem(food):
+	foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
+	fooddf = pd.read_excel(foodfile)
+	fooddf = fooddf.dropna(how='all')
+	fooddf = fooddf.set_index("name")
+	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
+	recipesdf = pd.read_excel(recipesfile)
+	recipesdf = recipesdf.fillna(0)
+	fooddf = fooddf.append(food, ignore_index=True)
+	readnwritenparse()
+	a = 1
+
+def addRecipe(recipe):
+	foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
+	fooddf = pd.read_excel(foodfile)
+	fooddf = fooddf.dropna(how='all')
+	fooddf = fooddf.set_index("name")
+	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
+	recipesdf = pd.read_excel(recipesfile)
+	recipesdf = recipesdf.fillna(0)
+	recipesdf = recipesdf.append(recipe, ignore_index=True)
+	readnwritenparse()
+	a = 1
 
 readnwritenparse()

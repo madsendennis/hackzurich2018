@@ -14,7 +14,7 @@ def forRufus():
 	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes_done.xls"
 	fooddf = pd.read_excel(foodfile)
 	fooddf = fooddf.dropna(how='all')
-	fooddf = fooddf.set_index("Name")
+	fooddf = fooddf.set_index("name")
 
 	recipesdf = pd.read_excel(recipesfile)
 	ingredientsdf = recipesdf.iloc[:,:len(fooddf)]
@@ -25,14 +25,14 @@ def forRufus():
 	    ingrlist = []
 	    for x in col[1]:
 	        if x != 0:
-	            ingrlist.append({"name":col[1].index[counter],"qty":x,"waterconsumption":(fooddf.loc[col[1].index[counter]]["Water Usage (L/g)"]*x)})
+	            ingrlist.append({"name":col[1].index[counter],"qty":x,"waterconsumption":(fooddf.loc[col[1].index[counter]]["water usage (l/g)"]*x)})
 	        counter+=1
 	    recipelist.update({col[0]:ingrlist})
 	(recipelist)
 	blub = list(zip(list(range(len(recipesdf))),list(recipesdf.index)))
 
 	for line in blub:
-	    recipesjsonlist.append({"id":line[0],"name":line[1],"ingredients":recipelist[line[1]],"nutrition":recipesdf.loc[line[1]]["Nutrition"],"fat":recipesdf.loc[line[1]]["Fat"],"sodium":recipesdf.loc[line[1]]["Sodium"],"sugar":recipesdf.loc[line[1]]["Sugar"],"carbs":recipesdf.loc[line[1]]["Carbs"],"protein":recipesdf.loc[line[1]]["Protein"],"cholesterol":recipesdf.loc[line[1]]["Cholesterol"],"vegetarian":recipesdf.loc[line[1]]["Vegetarian"],"kind":recipesdf.loc[line[1]]["Kind"]})
+	    recipesjsonlist.append({"id":line[0],"name":line[1],"ingredients":recipelist[line[1]],"nutrition":recipesdf.loc[line[1]]["nutrition"],"fat":recipesdf.loc[line[1]]["fat"],"sodium":recipesdf.loc[line[1]]["sodium"],"sugar":recipesdf.loc[line[1]]["sugar"],"carbs":recipesdf.loc[line[1]]["carbs"],"protein":recipesdf.loc[line[1]]["protein"],"cholesterol":recipesdf.loc[line[1]]["cholesterol"],"vegetarian":recipesdf.loc[line[1]]["vegetarian"],"kind":recipesdf.loc[line[1]]["kind"]})
 
 	recipesjsonlist
 	jsonforrufus = json.dumps(recipesjsonlist)
