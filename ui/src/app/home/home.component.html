@@ -3,7 +3,7 @@
   <form>
     <div class="form-group">
       <label for="recipeList">Recipe</label>
-      <select class="form-control" id="recipeList">
+      <select class="form-control" id="recipeList" (change)="onSelect($event.target.value)">
         <option value="-1">
           <span>Select a recipe</span>
         </option>
@@ -12,5 +12,13 @@
         </option>
       </select>
     </div>
-  </form>  
+  </form>
+  <div *ngIf="selectedRecipe">
+    <ul id="selectedRecipeIngredients">
+      <li *ngFor="let ingredient of selectedRecipe.ingredients">
+        <span>{{ingredient.name}} - {{ingredient.resourceConsumption}}</span>
+      </li>
+    </ul>
+    <p>Total consumption: {{recipeResourceConsumption}}</p>
+  </div>
 </div>
