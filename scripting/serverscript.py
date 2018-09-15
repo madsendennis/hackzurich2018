@@ -12,10 +12,10 @@ def hello_world():
     return 'Hello, World!'
 
 
-@app.route('/rufus')
-def forRufus():
-	foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
-	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes_done.xls"
+@app.route('/recipes')
+def recipes():
+	foodfile = "../data/food.xls"
+	recipesfile = "../data/recipes_done.xls"
 	fooddf = pd.read_excel(foodfile)
 	fooddf = fooddf.dropna(how='all')
 	fooddf = fooddf.set_index("name")

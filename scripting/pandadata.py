@@ -1,8 +1,8 @@
 import pandas as pd
 
 def readnwritenparse():
-	foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
-	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
+	foodfile = "../data/food.xls"
+	recipesfile = "../data/recipes.xls"
 	fooddf = pd.read_excel(foodfile)
 	fooddf = fooddf.dropna(how='all')
 	fooddf = fooddf.set_index("name")
@@ -46,14 +46,14 @@ def readnwritenparse():
 	for cols in range(len(fooddf.columns[2:])):
 	    recipesdf[fooddf.columns[2:][cols]] = newcols[cols]
 	recipesdf.index.name="name"
-	recipesdf.to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes_done.xls")
+	recipesdf.to_excel("../data/recipes_done.xls")
 
 def addFood(food):
-	foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
+	foodfile = "../data/food.xls"
 	fooddf = pd.read_excel(foodfile)
 	fooddf = fooddf.dropna(how='all')
 	fooddf = fooddf.set_index("name")
-	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
+	recipesfile = "../data/recipes.xls"
 	recipesdf = pd.read_excel(recipesfile)
 	recipesdf = recipesdf.fillna(0)
 	food = pd.DataFrame(food, index=[0])
@@ -62,16 +62,16 @@ def addFood(food):
 		print("added")
 		fooddf = fooddf.append(food).fillna(0)
 		fooddf = fooddf.drop_duplicates()
-		fooddf.drop_duplicates().sort_index().to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls")
+		fooddf.drop_duplicates().sort_index().to_excel("../data/food.xls")
 		readnwritenparse()
 	a = 1
 
 def addRecipe(recipe):
-	foodfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/food.xls"
+	foodfile = "../data/food.xls"
 	fooddf = pd.read_excel(foodfile)
 	fooddf = fooddf.dropna(how='all')
 	fooddf = fooddf.set_index("name")
-	recipesfile = "/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls"
+	recipesfile = "../data/recipes.xls"
 	recipesdf = pd.read_excel(recipesfile)
 	recipesdf = recipesdf.fillna(0)
 	recipesdf = recipesdf.set_index("name")
@@ -81,7 +81,7 @@ def addRecipe(recipe):
 	if(recipe.index[0] not in list(recipesdf.index)):
 		print("added")
 		recipesdf = recipesdf.append(recipe).fillna(0)
-		recipesdf.sort_index().to_excel("/home/patrick/Documents/hackzurich2018/hackzurich2018/data/recipes.xls")
+		recipesdf.sort_index().to_excel("../data/recipes.xls")
 		readnwritenparse()
 	a = 1
 
