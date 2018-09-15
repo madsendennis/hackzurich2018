@@ -72,5 +72,5 @@ def similaRecipe():
     foodObj = prepareFood()
     reciObj = prepareRecipe()
     similar = reciObj.getMostSimilar(name, foodObj.len)
-    return json.dumps(cleanForShowingRecipe(similar))
+    return json.dumps(cleanForShowingRecipe(similar, foodObj.len))
 
