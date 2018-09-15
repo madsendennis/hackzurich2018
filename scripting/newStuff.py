@@ -47,9 +47,6 @@ class getMaData:
         return self.df[1:4]
 
 
-
-
-
 def cleanForShowingRecipe(locdf, numOfFoodItems):
     waterIndex = 'water usage (l/g)'
     locdf = locdf.set_index("name")
@@ -62,8 +59,15 @@ def cleanForShowingRecipe(locdf, numOfFoodItems):
             if x != 0:
                 ingrlist.append({"name":rows[1].index[counter],"qty":x})
         water = locdf.loc[recipeName][waterIndex]
-        recipesjsonlist.append({'name': recipeName, 'ingredients': ingrlist, 'showIngredients': False, waterIndex: water})
-    return json.dumps(recipesjsonlist)
+        recipesjsonlist.append({'showIngredients': False, 'recipe': {'name': recipeName, 'ingredients': ingrlist, waterIndex: water}})
+    return json.loads(json.dumps(recipesjsonlist))
+
+
+# def cleanForShowingFoods(locdf):
+#     waterIndex = 'water usage (l/g)'
+#     locdf = locdf.set_index("name")
+#     foodlist = []
+#     return json.dumps(foodlist)
 
 
 def prepareFood():
@@ -87,6 +91,8 @@ if __name__ == '__main__':
     foods = foodObj.getMostSimilar('beef')
     recip = reciObj.getMostSimilar('meat pizza')
 
-    hest = cleanForShowingRecipe(recip, foodObj.len)
+    __ = cleanForShowingRecipe(recip, foodObj.len)
+
+    # hest = cleanForShowingFoods(foods)
 
     pass
