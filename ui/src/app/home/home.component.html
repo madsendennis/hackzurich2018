@@ -14,7 +14,21 @@
   <div *ngIf="selectedRecipe">
     <ul class="list-group" id="selectedRecipeIngredients">
       <li class="list-group-item " *ngFor="let ingredient of selectedRecipe.ingredients">
-        <span class="d-flex justify-content-between align-items-center">{{ingredient.qty}} g - {{ingredient.name}} - {{ingredient.resourceConsumption}} l <span class="badge badge-primary badge-pill">+</span></span>
+        <span class="d-flex justify-content-between align-items-center">
+          {{ingredient.qty}} g - {{ingredient.name}} - {{ingredient.resourceConsumption}} l 
+          <span class="badge badge-primary badge-pill" (click)="onShowAlternateIngredients(ingredient)">+</span>
+        </span>
+
+        <div class="pageItem" *ngIf="alternateIngredients && ingredient.name == alternateIngredientsDisplayedFor">
+          <h6>Alternate ingredients</h6>
+          <ul class="list-group" id="alternateRecipeIngredients">
+            <li class="list-group-item " *ngFor="let alternateIngredient of alternateIngredients">
+              <span>
+                {{alternateIngredient.qty}} g - {{alternateIngredient.name}} - {{alternateIngredient.resourceConsumption}} l 
+              </span>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
     <div class="pageItem">

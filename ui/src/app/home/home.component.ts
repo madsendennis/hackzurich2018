@@ -5,6 +5,7 @@ import { RECIPE_RECOMMENDATIONS } from '../mock-recipe-recommendations'
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_IPADDRESS } from '../custom.constants';
+import { RecipeIngredient } from '../recipeingredient';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,8 @@ export class HomeComponent implements OnInit {
   recipeRecommendations : RecipeRecommendation[] = RECIPE_RECOMMENDATIONS;
   showRecipeRecommendations : boolean = false;
   showRecipes : boolean = false;
+  alternateIngredients : RecipeIngredient[];
+  alternateIngredientsDisplayedFor : string;
 
   constructor(private http: HttpClient) { }
 
@@ -65,5 +68,13 @@ export class HomeComponent implements OnInit {
 
   onHideRecipes() {
     this.showRecipes = false;
+  }
+
+  onShowAlternateIngredients(recipeIngredient: RecipeIngredient) {
+    this.http.get(API_IPADDRESS + "/similarfoods?name=" + recipeIngredient.name + "&qty=" + recipeIngredient.qty).subscribe((data: RecipeIngredient[]) => {
+      this.alternateIngredients = data;
+      this.alternateIngredientsDisplayedFor = recipeIngredient.name;
+    });
+
   }
 }
