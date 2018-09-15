@@ -51,15 +51,18 @@ class getMaData:
 
 
 def cleanForShowingRecipe(locdf, numOfFoodItems):
+    waterIndex = 'water usage (l/g)'
     locdf = locdf.set_index("name")
     ingredientsdf = locdf.iloc[:,1:numOfFoodItems]
     recipesjsonlist = []
-    for rows in ingredientsdf.iterrows():
+    for (bigIndex, rows) in enumerate(ingredientsdf.iterrows()):
+        recipeName = rows[0]
         ingrlist = []
         for (counter, x) in enumerate(rows[1]):
             if x != 0:
                 ingrlist.append({"name":rows[1].index[counter],"qty":x})
-        recipesjsonlist.append({'name': rows[0], 'ingredients': ingrlist, 'showIngredients': False})
+        water = locdf.loc[recipeName][waterIndex]
+        recipesjsonlist.append({'name': recipeName, 'ingredients': ingrlist, 'showIngredients': False, waterIndex: water})
     return json.dumps(recipesjsonlist)
 
 
