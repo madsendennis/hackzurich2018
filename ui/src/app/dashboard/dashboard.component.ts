@@ -11,12 +11,21 @@ import { API_IPADDRESS } from '../custom.constants';
 @Injectable()
 export class DashboardComponent implements OnInit {
   overview: Dashboard;
+  dayProgress: string;
+  weekProgress: string;
+  monthProgress: string;
+  yearProgress: string;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.overview = new Dashboard();
     this.http.get(API_IPADDRESS + "/user/overview").subscribe((data: Dashboard) => {
       this.overview = data;
+      this.dayProgress = this.overview.ratioToday + "%";
+      this.weekProgress = this.overview.ratioWeek + "%";
+      this.monthProgress = this.overview.ratioMonth + "%";
+      this.yearProgress = this.overview.ratioYear + "%";
     });
   }
 
