@@ -20,7 +20,7 @@ def readnwritenparse():
 	        nutrition = 0
 	        ifstring = []
 	        isstring = False
-	        for ingredient in range(1,len(recipe[1])):
+	        for ingredient in range(0,len(recipe[1])):
 	            if(recipe[1][ingredient] != 0.0):
 	                if(type(fooddf.loc[recipesdf.columns[ingredient]][cols]) is str):
 	                    isstring = True
@@ -85,4 +85,4 @@ def addRecipe(recipe):
 		readnwritenparse()
 	a = 1
 
-#readnwritenparse()
+readnwritenparse()
