@@ -122,6 +122,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  onHideAlternateIngredients() {
+    this.alternateIngredients = null;
+  }
+
   onConsumeFood(recipe: Recipe) {
     if (this.isSelectedRecipeUpdated) {
       recipe.name += "_*";
