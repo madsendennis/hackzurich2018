@@ -106,7 +106,7 @@ def userOverview():
                        'ratioToday': ratioToday, 'ratioWeek': ratioWeek, 'ratioMonth': ratioMonth, 'ratioYear': ratioYear
                        })
 
-# 5000 L/day = 5kL
-# week - 35L
-# month - 150L
-# year - 1825
+# 3500 L/day (5kL on average for meat eater, 2.5kL on average for vegetarians)
+# week  -   24.5 kL
+# month -  105   kL
+# year  - 1277.5 kL
