@@ -109,7 +109,10 @@ export class HomeComponent implements OnInit {
   }
 
   onShowRecipes() {
-    this.showRecipes = true;
+    if (this.showRecipes)
+      this.showRecipes = false;
+    else
+      this.showRecipes = true;
   }
 
   onHideRecipes() {
