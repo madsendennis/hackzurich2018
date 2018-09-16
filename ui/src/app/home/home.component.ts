@@ -39,6 +39,13 @@ export class HomeComponent implements OnInit {
       this.recipeRecommendations = data;
     });
 
+    this.recipeRecommendations.forEach(rr => {
+      rr.recipe.resourceConsumption = 0;
+      rr.recipe.ingredients.forEach(i => {
+        rr.recipe.resourceConsumption += Number(Math.round(i.resourceConsumption).toFixed(2));
+      });
+    });
+
     this.selectedRecipe.resourceConsumption = 0;
     this.selectedRecipe.ingredients.forEach(i => {
       this.selectedRecipe.resourceConsumption += Number(Math.round(i.resourceConsumption).toFixed(2));
