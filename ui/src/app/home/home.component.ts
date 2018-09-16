@@ -41,11 +41,12 @@ export class HomeComponent implements OnInit {
 
     this.selectedRecipe.resourceConsumption = 0;
     this.selectedRecipe.ingredients.forEach(i => {
-      this.selectedRecipe.resourceConsumption += i.resourceConsumption;
+      this.selectedRecipe.resourceConsumption += Number(Math.round(i.resourceConsumption).toFixed(2));
     });
 
     this.updatedRecipe = this.onGetCopyOfSelectedRecipe();
     this.isSelectedRecipeUpdated = false;
+    this.alternateIngredients = null;
     this.onHideRecipes();
   }
 
@@ -64,7 +65,7 @@ export class HomeComponent implements OnInit {
 
     copyRecipe.resourceConsumption = 0;
     copyRecipe.ingredients.forEach(i => {
-      copyRecipe.resourceConsumption += i.resourceConsumption;
+      copyRecipe.resourceConsumption += Number(Math.round(i.resourceConsumption).toFixed(2));
     });
 
     return copyRecipe;
@@ -78,7 +79,7 @@ export class HomeComponent implements OnInit {
     this.alternateIngredients = null;
     this.updatedRecipe.resourceConsumption = 0;
     this.updatedRecipe.ingredients.forEach(i => {
-      this.updatedRecipe.resourceConsumption += i.resourceConsumption;
+      this.updatedRecipe.resourceConsumption += Number(Math.round(i.resourceConsumption).toFixed(2));
     });
     this.isSelectedRecipeUpdated = true;
   }
