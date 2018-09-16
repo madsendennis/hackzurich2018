@@ -76,11 +76,11 @@ export class HomeComponent implements OnInit {
     this.updatedRecipe.ingredients[indexOfOutIngredient].qty = inIngredient.qty;
     this.updatedRecipe.ingredients[indexOfOutIngredient].resourceConsumption = inIngredient.resourceConsumption;
     this.alternateIngredients = null;
-
     this.updatedRecipe.resourceConsumption = 0;
     this.updatedRecipe.ingredients.forEach(i => {
       this.updatedRecipe.resourceConsumption += i.resourceConsumption;
     });
+    this.isSelectedRecipeUpdated = true;
   }
 
   onViewRecommendations() {
@@ -123,6 +123,9 @@ export class HomeComponent implements OnInit {
   }
 
   onConsumeFood(recipe: Recipe) {
+    if (this.isSelectedRecipeUpdated) {
+      recipe.name += "_*";
+    }
     this.http.get(API_IPADDRESS + "/user/consumefood?name=" + recipe.name + "&resource=" + recipe.resourceConsumption).subscribe((data: ApiJsonResponse) => {
       if (data.isAdded) {
         this.selectedRecipe = null;
