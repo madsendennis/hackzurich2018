@@ -17,6 +17,8 @@ import { ApiJsonResponse } from '../api.json.response';
 export class HomeComponent implements OnInit {
   recipes : Recipe[];
   selectedRecipe : Recipe;
+  updatedRecipe : Recipe;
+  isSelectedRecipeUpdated: boolean = false;
   recipeRecommendations : RecipeRecommendation[] = RECIPE_RECOMMENDATIONS;
   showRecipeRecommendations : boolean = false;
   showRecipes : boolean = false;
@@ -36,7 +38,49 @@ export class HomeComponent implements OnInit {
     this.http.get(API_IPADDRESS + "/similarrecipes?name="+recipe.name).subscribe((data: RecipeRecommendation[]) => {
       this.recipeRecommendations = data;
     });
+
+    this.selectedRecipe.resourceConsumption = 0;
+    this.selectedRecipe.ingredients.forEach(i => {
+      this.selectedRecipe.resourceConsumption += i.resourceConsumption;
+    });
+
+    this.updatedRecipe = this.onGetCopyOfSelectedRecipe();
+    this.isSelectedRecipeUpdated = false;
     this.onHideRecipes();
+  }
+
+  onGetCopyOfSelectedRecipe(): Recipe {
+    let copyRecipe : Recipe = new Recipe();
+    copyRecipe.name = this.selectedRecipe.name;
+    copyRecipe.resourceConsumption = this.selectedRecipe.resourceConsumption;
+    copyRecipe.ingredients = [];
+    this.selectedRecipe.ingredients.forEach(i => {
+      let recipeIngredient = new RecipeIngredient();
+      recipeIngredient.name = i.name;
+      recipeIngredient.qty = i.qty;
+      recipeIngredient.resourceConsumption = i.resourceConsumption;
+      copyRecipe.ingredients.push(recipeIngredient);
+    }); 
+
+    copyRecipe.resourceConsumption = 0;
+    copyRecipe.ingredients.forEach(i => {
+      copyRecipe.resourceConsumption += i.resourceConsumption;
+    });
+
+    return copyRecipe;
+  }
+
+  onSwapIngredientsInRecipe(outIngredient: RecipeIngredient, inIngredient: RecipeIngredient) {
+    let indexOfOutIngredient: number = this.updatedRecipe.ingredients.map(i => i.name).indexOf(outIngredient.name);
+    this.updatedRecipe.ingredients[indexOfOutIngredient].name = inIngredient.name;
+    this.updatedRecipe.ingredients[indexOfOutIngredient].qty = inIngredient.qty;
+    this.updatedRecipe.ingredients[indexOfOutIngredient].resourceConsumption = inIngredient.resourceConsumption;
+    this.alternateIngredients = null;
+
+    this.updatedRecipe.resourceConsumption = 0;
+    this.updatedRecipe.ingredients.forEach(i => {
+      this.updatedRecipe.resourceConsumption += i.resourceConsumption;
+    });
   }
 
   onViewRecommendations() {
@@ -82,6 +126,7 @@ export class HomeComponent implements OnInit {
     this.http.get(API_IPADDRESS + "/user/consumefood?name=" + recipe.name + "&resource=" + recipe.resourceConsumption).subscribe((data: ApiJsonResponse) => {
       if (data.isAdded) {
         this.selectedRecipe = null;
+        this.updatedRecipe = null;
       }
     });
   }

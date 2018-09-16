@@ -5,26 +5,27 @@
     Choose your recipe
     </a>
   </div>
-  <div *ngIf="selectedRecipe" class="container">
-    <h4 class="display-8">{{selectedRecipe.name}}</h4>
+  <div *ngIf="updatedRecipe" class="container">
+    <h4 class="display-8">{{updatedRecipe.name}}</h4>
   </div>
   <ul *ngIf="showRecipes" class="list-group">
     <li *ngFor="let recipe of recipes" class="list-group-item" href="#" (click)=onSelect(recipe)><h5>{{recipe.name}}</h5></li>
   </ul>
-  <div *ngIf="selectedRecipe">
+  <div *ngIf="updatedRecipe">
     <ul class="list-group" id="selectedRecipeIngredients">
-      <li class="list-group-item " *ngFor="let ingredient of selectedRecipe.ingredients">
+      <li class="list-group-item " *ngFor="let ingredient of updatedRecipe.ingredients">
         <span class="d-flex justify-content-between align-items-center">
           {{ingredient.qty}} g - {{ingredient.name}} - {{ingredient.resourceConsumption}} l 
-          <span class="badge badge-primary badge-pill" (click)="onShowAlternateIngredients(ingredient)">+</span>
+          <span class="badge badge-primary badge-pill" (click)="onShowAlternateIngredients(ingredient)">v</span>
         </span>
 
         <div class="pageItem" *ngIf="alternateIngredients && ingredient.name == alternateIngredientsDisplayedFor">
           <h6>Alternate ingredients</h6>
           <ul class="list-group" id="alternateRecipeIngredients">
             <li class="list-group-item " *ngFor="let alternateIngredient of alternateIngredients">
-              <span>
+              <span class="d-flex justify-content-between align-items-center">
                 {{alternateIngredient.qty}} g - {{alternateIngredient.name}} - {{alternateIngredient.resourceConsumption}} l 
+                <span class="badge badge-primary badge-pill" (click)="onSwapIngredientsInRecipe(ingredient, alternateIngredient)">^</span>
               </span>
             </li>
           </ul>
@@ -32,7 +33,7 @@
       </li>
     </ul>
     <div class="pageItem">
-      <h5>Total water consumption: {{selectedRecipe.resourceConsumption}} litres</h5>
+      <h5>Total water consumption: {{updatedRecipe.resourceConsumption}} litres</h5>
     </div>
     <p>We would like to recommend similar recipes with lower cost to the environment.</p>
     <p>
@@ -60,7 +61,7 @@
     </ul>
 
     <p>
-      <a id="consumeFood" class="btn btn-info" href="#consumeFood" role="button" (click)="onConsumeFood(selectedRecipe)">
+      <a id="consumeFood" class="btn btn-info" href="#consumeFood" role="button" (click)="onConsumeFood(updatedRecipe)">
         Consume Food
       </a>
     </p>  
