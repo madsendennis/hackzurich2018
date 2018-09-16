@@ -1,35 +1,35 @@
 <div class="dashboardDiv">
-  <div class="card dashboardCard" style="width: 18rem;">
+  <div class="card dashboardCard" style="width: 20rem;">
     <div class="card-body">
       <h5 class="card-title">Today</h5>
-      <p class="card-text">{{overview.today}}</p>
+      <p class="card-text">{{overview.today}} / {{overview.thresholdToday}} kl</p>
       <div class="progress">
         <div class="progress-bar" [ngClass]="getProgressClass(overview.ratioToday)" [ngStyle]="{'width': dayProgress}" role="progressbar"></div>
       </div>
     </div>
   </div>
-  <div class="card dashboardCard" style="width: 18rem;">
+  <div class="card dashboardCard" style="width: 20rem;">
     <div class="card-body">
-      <h5 class="card-title">This week</h5>
-      <p class="card-text">{{overview.week}}</p>
+      <h5 class="card-title">Week</h5>
+      <p class="card-text">{{overview.week}} / {{overview.thresholdWeek}} kl</p>
       <div class="progress">
           <div class="progress-bar" [ngClass]="getProgressClass(overview.ratioWeek)" [ngStyle]="{'width': weekProgress}" role="progressbar"></div>
         </div>
       </div>
   </div>
-  <div class="card dashboardCard" style="width: 18rem;">
+  <div class="card dashboardCard" style="width: 20rem;">
     <div class="card-body">
-      <h5 class="card-title">This month</h5>
-      <p class="card-text">{{overview.month}}</p>
+      <h5 class="card-title">Month</h5>
+      <p class="card-text">{{overview.month}} / {{overview.thresholdMonth}} kl</p>
       <div class="progress">
           <div class="progress-bar" [ngClass]="getProgressClass(overview.ratioMonth)" [ngStyle]="{'width': monthProgress}" role="progressbar"></div>
         </div>  
     </div>
   </div>
-  <div class="card dashboardCard" style="width: 18rem;">
+  <div class="card dashboardCard" style="width: 20rem;">
     <div class="card-body">
-      <h5 class="card-title">This year</h5>
-      <p class="card-text">{{overview.year}}</p>
+      <h5 class="card-title">Year</h5>
+      <p class="card-text">{{overview.year}} / {{overview.thresholdYear}} kl</p>
       <div class="progress">
         <div class="progress-bar" [ngClass]="getProgressClass(overview.ratioYear)" [ngStyle]="{'width': yearProgress}" role="progressbar"></div>
       </div>  

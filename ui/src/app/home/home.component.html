@@ -32,8 +32,9 @@
         </div>
       </li>
     </ul>
+    <br>
     <div class="pageItem">
-      <h5>Total water consumption: {{updatedRecipe.resourceConsumption}} litres</h5>
+      <h5>Total water consumption: <span class="waterConsumption">{{updatedRecipe.resourceConsumption}}</span> litres</h5>
     </div>
     <p>We would like to recommend similar recipes with lower cost to the environment.</p>
     <p>
@@ -53,13 +54,13 @@
             </li>
           </ul>
           <p class="pageItem">Total water consumption: {{recommendation.recipe.resourceConsumption}} litres</p>
-          <a href="#" role="button" (click)=onChoosingRecommendedRecipe(recommendation)>
-            I will use this recipe instead
+          <a href="#" class="btn btn-info" role="button" (click)=onChoosingRecommendedRecipe(recommendation)>
+            Use this recipe instead
           </a>
         </div>
       </li>
     </ul>
-
+    <p></p>
     <p>
       <a id="consumeFood" class="btn btn-info" href="#consumeFood" role="button" (click)="onConsumeFood(updatedRecipe)">
         Consume Food
