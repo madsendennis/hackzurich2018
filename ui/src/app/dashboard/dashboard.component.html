@@ -4,7 +4,7 @@
       <h5 class="card-title">Today</h5>
       <p class="card-text">{{overview.today}}</p>
       <div class="progress">
-        <div class="progress-bar bg-success" [ngStyle]="{'width': dayProgress}" role="progressbar"></div>
+        <div class="progress-bar" [ngClass]="getProgressClass(overview.ratioToday)" [ngStyle]="{'width': dayProgress}" role="progressbar"></div>
       </div>
     </div>
   </div>
@@ -13,7 +13,7 @@
       <h5 class="card-title">This week</h5>
       <p class="card-text">{{overview.week}}</p>
       <div class="progress">
-          <div class="progress-bar bg-success" [ngStyle]="{'width': weekProgress}" role="progressbar"></div>
+          <div class="progress-bar" [ngClass]="getProgressClass(overview.ratioWeek)" [ngStyle]="{'width': weekProgress}" role="progressbar"></div>
         </div>
       </div>
   </div>
@@ -22,7 +22,7 @@
       <h5 class="card-title">This month</h5>
       <p class="card-text">{{overview.month}}</p>
       <div class="progress">
-          <div class="progress-bar bg-success" [ngStyle]="{'width': monthProgress}" role="progressbar"></div>
+          <div class="progress-bar" [ngClass]="getProgressClass(overview.ratioMonth)" [ngStyle]="{'width': monthProgress}" role="progressbar"></div>
         </div>  
     </div>
   </div>
@@ -31,7 +31,7 @@
       <h5 class="card-title">This year</h5>
       <p class="card-text">{{overview.year}}</p>
       <div class="progress">
-        <div class="progress-bar bg-success" [ngStyle]="{'width': yearProgress}" role="progressbar"></div>
+        <div class="progress-bar" [ngClass]="getProgressClass(overview.ratioYear)" [ngStyle]="{'width': yearProgress}" role="progressbar"></div>
       </div>  
     </div>
   </div>
