@@ -32,12 +32,12 @@ export class DashboardComponent implements OnInit {
   getProgressClass(ratio: number): string {
     if (ratio <= 50) {
       return "bg-success";
-    } else if (ratio <= 67) {
+    } else if (ratio <= 70) {
       return "bg-info";
-    } else if (ratio <= 84) {
+    } else if (ratio <= 90) {
       return "bg-warning";
     } else {
-      return "bg-error";
+      return "bg-danger";
     }
   }
 }
