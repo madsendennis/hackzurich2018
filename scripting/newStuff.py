@@ -69,12 +69,13 @@ def cleanForShowingRecipe(locdfRec, locdfFood):
 
 
 def cleanForShowingFoods(locdf, qty):
+    qty = float(qty)
     waterIndex = 'water usage (l/g)'
     waterText = 'resourceConsumption'
     locdf = locdf.set_index('name')
     foodlist = []
     for row in locdf.iterrows():
-        foodlist.append({'name': row[0], 'qty': qty, waterText: round(float(row[1][waterIndex])*float(qty),2)})
+        foodlist.append({'name': row[0], 'qty': qty, waterText: round(float(row[1][waterIndex])*qty,2)})
     return foodlist
 
 
